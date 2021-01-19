@@ -14,6 +14,32 @@ class Model {
     }
   }
 
+  // BUG
+  async findByIdAndUpdate(id, fields) {
+    if (id) {
+      const entries = Object.entries(fields);
+      const query = `UPDATE ${this.name} SET ${entries
+        .map(([key, val]) => `${key} = '${val}'`)
+        .join(",")} WHERE id=${parseInt(id)};`;
+      const response = await this.run(query);
+      return response;
+    }
+
+    throw new Error(`${id}: This does not looks like id`);
+  }
+  // BUG
+
+  async findByIdAndDelete(id) {
+    if (id) {
+      const query = `DELETE FROM ${this.name} WHERE id=${parseInt(id, 10)}`;
+
+      const res = await this.run(query);
+
+      return res;
+    }
+    throw new Error(`${id}: This does not looks like id`);
+  }
+
   async findOne(fields) {
     if (!fields || Object.values(fields).length === 0) {
       const query = `SELECT * FROM ${this.name}`;
