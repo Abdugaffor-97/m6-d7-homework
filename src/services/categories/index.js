@@ -2,11 +2,11 @@ const Model = require("../../utils/model");
 
 const router = require("express").Router();
 
-const ArticleModel = new Model("articles");
+const CategoryModel = new Model("categories");
 
 router.get("/", async (req, res, next) => {
   try {
-    const authorsTable = await ArticleModel.findOne();
+    const authorsTable = await CategoryModel.findOne();
     res.send(authorsTable);
   } catch (error) {
     res.send(error);
@@ -15,7 +15,7 @@ router.get("/", async (req, res, next) => {
 
 router.delete("/:id", async (req, res, next) => {
   try {
-    await ArticleModel.findByIdAndDelete(req.params.id);
+    await CategoryModel.findByIdAndDelete(req.params.id);
 
     res.send("Deleted");
   } catch (error) {
@@ -25,7 +25,7 @@ router.delete("/:id", async (req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
   try {
-    const { rows } = await ArticleModel.findById(req.params.id);
+    const { rows } = await CategoryModel.findById(req.params.id);
     res.send(rows);
   } catch (error) {
     res.send(error);
@@ -34,7 +34,7 @@ router.get("/:id", async (req, res, next) => {
 
 router.put("/:id", async (req, res, next) => {
   try {
-    const response = await ArticleModel.findByIdAndUpdate(
+    const response = await CategoryModel.findByIdAndUpdate(
       req.params.id,
       req.body
     );
@@ -47,7 +47,7 @@ router.put("/:id", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const response = await ArticleModel.save(req.body);
+    const response = await CategoryModel.save(req.body);
     res.send(response);
     // console.log(response);
   } catch (error) {
