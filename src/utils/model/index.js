@@ -14,6 +14,22 @@ class Model {
     }
   }
 
+  async findOne(fields) {
+    if (!fields || Object.values(fields).length === 0) {
+      const query = `SELECT * FROM ${this.name}`;
+      const res = await this.run(query);
+      return res;
+    }
+    const entries = Object.entries(fields);
+    const whereClouse = `${entries
+      .map(([key, val]) => `${key}='${val}'`)
+      .join(" AND ")}`;
+
+    const query = `SELECT * FROM ${this.name} WHERE ${whereClouse}`;
+    const response = await this.run(query);
+    return response;
+  }
+
   async findById(id) {
     if (id) {
       const query = `SELECT * FROM ${this.name} WHERE id=${parseInt(id, 10)}`;
