@@ -6,8 +6,13 @@ const ArticleModel = new Model("articles");
 
 router.get("/", async (req, res, next) => {
   try {
-    const { rows } = await CategoryModel.save(req.body);
-    res.send(...rows);
+    const { rows } = await ArticleModel.findOne();
+    console.log(rows);
+    if (rows) {
+      res.send(...rows);
+    } else {
+      res.send("Table is empty");
+    }
   } catch (error) {
     res.send(error);
   }
@@ -47,8 +52,8 @@ router.put("/:id", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const response = await ArticleModel.save(req.body);
-    res.send(response);
+    const { rows } = await ArticleModel.save(req.body);
+    res.send(...rows);
     // console.log(response);
   } catch (error) {
     res.send(error);
