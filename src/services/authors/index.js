@@ -6,8 +6,8 @@ const AuthorModel = new Model("authors");
 
 router.get("/", async (req, res, next) => {
   try {
-    const authorsTable = await AuthorModel.findOne();
-    res.send(authorsTable);
+    const { rows } = await AuthorModel.findOne();
+    res.send(rows);
   } catch (error) {
     res.send(error);
   }
@@ -46,10 +46,10 @@ router.put("/:id", async (req, res, next) => {
 });
 
 router.post("/", async (req, res, next) => {
+  console.log(req);
   try {
     const response = await AuthorModel.save(req.body);
     res.send(response);
-    // console.log(response);
   } catch (error) {
     res.send(error);
   }
