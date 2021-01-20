@@ -13,6 +13,11 @@
 # M6-D8 HOMEWORK
 
 - Get articles with author and category by joining tables
+  {
+  SELECT \* FROM articles AS ar
+  INNER JOIN authors as au ON ar.author_id=au.id
+  INNER JOIN categories as cat ON ar.category_id = cat.id;
+  }
 - Search articles with title or content
 - Count categories group by them id
 - Sum total claps , reviews for an article

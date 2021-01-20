@@ -2,14 +2,19 @@ const Model = require("../../utils/model");
 
 const router = require("express").Router();
 
-const ArticleModel = new Model("articles");
+const table_name = "articles";
+const ArticleModel = new Model(table_name);
 
 router.get("/", async (req, res, next) => {
   try {
-    const { rows } = await ArticleModel.findOne();
-    console.log(rows);
+    const query = `SELECT ar.id, ar.headline, ar.content,
+     ar.cover, ar.author_id, ar.category_id, au.first_name,
+      au.last_name, au.email, cat.category_name FROM ${table_name} AS ar
+      INNER JOIN authors as au ON ar.author_id=au.id 
+      INNER JOIN categories as cat ON ar.category_id = cat.id;`;
+    const { rows } = await ArticleModel.runQuery(query);
     if (rows) {
-      res.send(...rows);
+      res.send(rows);
     } else {
       res.send("Table is empty");
     }
