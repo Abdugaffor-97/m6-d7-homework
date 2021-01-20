@@ -6,8 +6,8 @@ const ArticleModel = new Model("articles");
 
 router.get("/", async (req, res, next) => {
   try {
-    const authorsTable = await ArticleModel.findOne();
-    res.send(authorsTable);
+    const { rows } = await CategoryModel.save(req.body);
+    res.send(...rows);
   } catch (error) {
     res.send(error);
   }

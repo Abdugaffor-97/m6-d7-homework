@@ -48,8 +48,8 @@ router.put("/:id", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   console.log(req);
   try {
-    const response = await AuthorModel.save(req.body);
-    res.send(response);
+    const { rows } = await CategoryModel.save(req.body);
+    res.send(...rows);
   } catch (error) {
     res.send(error);
   }

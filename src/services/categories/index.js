@@ -6,8 +6,8 @@ const CategoryModel = new Model("categories");
 
 router.get("/", async (req, res, next) => {
   try {
-    const authorsTable = await CategoryModel.findOne();
-    res.send(authorsTable);
+    const { rows } = await ArticleModel.findOne();
+    res.send(rows);
   } catch (error) {
     res.send(error);
   }
@@ -47,8 +47,8 @@ router.put("/:id", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const response = await CategoryModel.save(req.body);
-    res.send(response);
+    const { rows } = await CategoryModel.save(req.body);
+    res.send(...rows);
     // console.log(response);
   } catch (error) {
     res.send(error);

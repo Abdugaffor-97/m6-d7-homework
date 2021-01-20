@@ -73,7 +73,9 @@ class Model {
     const values = Object.values(fields);
     const query = `INSERT INTO ${this.name} (${columns.join(
       ","
-    )}) VALUES (${values.map((value) => `'${value}'`).join(",")})`;
+    )}) VALUES (${values.map((value) => `'${value}'`).join(",")}) 
+    RETURNING *;
+    `;
 
     const res = await this.run(query);
     return res;
