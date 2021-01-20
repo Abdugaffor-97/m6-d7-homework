@@ -1,7 +1,7 @@
 require("dotenv").config();
 const fs = require("fs");
 const path = require("path");
-const db = require("../utils/db");
+const db = require("../src/utils/db");
 const { promisify } = require("util");
 const read = promisify(fs.readFile);
 
