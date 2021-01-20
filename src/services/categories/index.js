@@ -6,9 +6,10 @@ const CategoryModel = new Model("categories");
 
 router.get("/", async (req, res, next) => {
   try {
-    const { rows } = await ArticleModel.findOne();
+    const { rows } = await CategoryModel.findOne();
     res.send(rows);
   } catch (error) {
+    console.log(error);
     res.send(error);
   }
 });
