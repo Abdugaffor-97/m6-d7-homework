@@ -21,3 +21,18 @@
 - Search articles with title or content
 - Count categories group by them id
 - Sum total claps , reviews for an article
+
+
+
+
+# M6-D9 HOMEWORK
+
+## Medium in Sequelize
+
+- Create Article, Author, Review, Category Model.
+- Implement associations between the models.
+- Implement CRUDS for articles, reviews, authors and categories
+- In GET /articles endpoint articles should include categories, author and reviews ( reviews should include author who posted a review)
+- Implement filters, pagination, search on article
+
+[EXTRA] Count number of articles under each category
