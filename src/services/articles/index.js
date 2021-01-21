@@ -7,13 +7,20 @@ const ArticleModel = new Model(table_name);
 
 router.get("/", async (req, res, next) => {
   try {
-    const query = `SELECT ar.id, ar.headline, ar.content,
-     ar.cover, ar.author_id, ar.category_id, au.first_name,
+    let query = `SELECT ar.id, ar.headline, ar.content,
+      ar.cover, ar.author_id, ar.category_id, au.first_name,
       au.last_name, au.email, cat.category_name FROM ${table_name} AS ar
       INNER JOIN authors as au ON ar.author_id=au.id 
-      INNER JOIN categories as cat ON ar.category_id = cat.id;`;
+      INNER JOIN categories as cat ON ar.category_id = cat.id;
+    `;
+
+    if (Object.entries(req.query).length) {
+      query = ``;
+    }
+
     const { rows } = await ArticleModel.runQuery(query);
-    if (rows) {
+
+    if (rows.length) {
       res.send(rows);
     } else {
       res.send("Table is empty");
