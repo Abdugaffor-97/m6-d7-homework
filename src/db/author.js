@@ -15,4 +15,5 @@ module.exports = () => {
     },
     { timestamps: false }
   );
+  return Author;
 };

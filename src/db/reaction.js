@@ -1,9 +1,11 @@
 const { DataTypes } = require("sequelize/types");
 const sequelize = require("./db_setup");
+const Author = require("./author");
+const Article = require("./article");
 
 module.exports = () => {
-  const Category = sequelize.define(
-    "category",
+  const Reaction = sequelize.define(
+    "reaction",
     {
       id: {
         type: DataTypes.INTEGER,
@@ -14,5 +16,8 @@ module.exports = () => {
     },
     { timestamps: false }
   );
-  return Category;
+  Reaction.associations = () => {
+    Reaction.belongsTo(Author);
+  };
+  return Reaction;
 };
